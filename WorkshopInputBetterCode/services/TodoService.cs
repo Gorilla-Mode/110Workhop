@@ -47,10 +47,7 @@ public class TodoService : ITodoService
 
     public Todo? Select(string query)
     {
-        var tasks = Database.Get();
-        
-        var selectedTodo = tasks.FirstOrDefault(t => t.Id.ToString() == query || t.Name.Contains(query));
-        
+        var selectedTodo = Database.Get(query);
         return selectedTodo;
     }
 
