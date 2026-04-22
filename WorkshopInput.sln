@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{0DE5B036
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopInputBetterCode", "WorkshopInputBetterCode\WorkshopInputBetterCode.csproj", "{F4385A94-93DA-45BF-B257-6979F7B363EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{486AD9CB-D4CF-4946-8FCA-CB5EB9A17146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{486AD9CB-D4CF-4946-8FCA-CB5EB9A17146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{486AD9CB-D4CF-4946-8FCA-CB5EB9A17146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4385A94-93DA-45BF-B257-6979F7B363EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4385A94-93DA-45BF-B257-6979F7B363EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4385A94-93DA-45BF-B257-6979F7B363EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4385A94-93DA-45BF-B257-6979F7B363EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
