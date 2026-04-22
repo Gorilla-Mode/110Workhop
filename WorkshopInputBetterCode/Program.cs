@@ -1,8 +1,10 @@
-﻿using WorkshopInputBetterCode.services;
+﻿using WorkshopInputBetterCode.interfaces;
+using WorkshopInputBetterCode.services;
 using WorkshopInputBetterCode.ui;
 
-var menuSelectService = new MenuSelectService(new TodoService());
-var menuMainService = new MenuMainService(new TodoService(), menuSelectService);
+ITodoService       todoService       = new TodoService();
+IMenuSelectService menuSelectService = new MenuSelectService(todoService);
+IMenuMainService   menuMainService   = new MenuMainService(todoService, menuSelectService);
 
 bool run = true;
 while (run)
