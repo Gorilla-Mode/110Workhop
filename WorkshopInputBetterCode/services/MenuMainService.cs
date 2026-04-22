@@ -1,36 +1,43 @@
-﻿using WorkshopInputBetterCode.db;
-using WorkshopInputBetterCode.enums;
-using WorkshopInputBetterCode.models;
+﻿using WorkshopInputBetterCode.enums;
+using WorkshopInputBetterCode.interfaces;
 
 namespace WorkshopInputBetterCode.services;
 
-public static class MenuMainService 
+public class MenuMainService(ITodoService todoService, IMenuSelectService selectService) : IMenuMainService
 {
-    public static void Run()
+    public void Run()
     {
-        for (bool run = true; run;)
+        try
         {
             Console.Clear();
-            Console.WriteLine("Todo List\n 1. Add task\n 2. Select task\n 3. List Items\n 4. Exit\n");
+            Console.WriteLine("Todo List\n 1. Add task\n 2. Select task\n 3. List Items\n 0. Exit\n");
+            Console.Write("Enter choice: ");
 
             if (!Enum.TryParse(Console.ReadLine(), out MenuMain input))
             {
                 Console.WriteLine("Invalid choice");
-                Console.ReadLine();
-                continue;
+                Console.ReadKey();
+                return;
             }
 
             switch (input)
             {
-                case MenuMain.AddTask: AddTask();                           break;
-                case MenuMain.Exit:    run = false;                         break;
-                default:               Console.WriteLine("Invalid choice"); break;
+                case MenuMain.AddTask:    AddTask();                        break;
+                case MenuMain.SelectTask: SelectTask();                     break;
+                case MenuMain.ListTasks:  ListTasks();                      break;
+                case MenuMain.Exit:       Environment.Exit(0);              break;
+                default:                  
+                    Console.WriteLine("Invalid choice"); Console.ReadKey(); break;
             }
-            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.ReadKey();
         }
     }
-    
-    private static void AddTask()
+
+    public void AddTask()
     {
         Console.Clear();
         Console.WriteLine("Enter task name:");
@@ -38,34 +45,36 @@ public static class MenuMainService
         
         Console.WriteLine("Enter task description:");
         string description = Console.ReadLine() ?? string.Empty;
+        todoService.Add(name, description);
+        Console.ReadKey();
+    }
 
-        try
+    public void SelectTask()
+    {
+        Console.Clear();
+        Console.WriteLine("Enter task id/name:");
+        string query = Console.ReadLine() ?? string.Empty;
+        
+        var result = todoService.Select(query);
+        if (result == null)
         {
-            Database.Add(new Todo(name, description));
-            Console.WriteLine("Task added");
-            Console.ReadLine();
+            Console.WriteLine("Task not found");
+            Console.ReadKey();
+            return;
         }
-        catch (ArgumentException e)
+
+        bool run = true;
+        while (run)
         {
-            Console.WriteLine(e.Message);
-            Console.ReadLine();
-            Run();
+            selectService.Run(ref run, result);
         }
-        catch (AggregateException e)
-        {
-            Console.WriteLine($"Validation failed: {e.InnerExceptions.Count} error(s)");
-            foreach (var exception in e.InnerExceptions)
-            {
-                Console.WriteLine($"\t{exception.Message}");
-            }
-            
-            Console.ReadLine();
-            Run();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            throw;
-        }
+    }
+
+    public void ListTasks()
+    {
+        Console.Clear();
+        Console.WriteLine("List of tasks:");
+        todoService.List();
+        Console.ReadKey();
     }
 }

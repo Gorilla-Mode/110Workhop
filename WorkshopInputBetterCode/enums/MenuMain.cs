@@ -4,6 +4,6 @@ public enum MenuMain
 {
     Exit,
     AddTask,
-    RemoveTask,
+    SelectTask,
     ListTasks
 }
