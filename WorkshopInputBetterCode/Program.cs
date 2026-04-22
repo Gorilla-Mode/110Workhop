@@ -4,7 +4,8 @@ using WorkshopInputBetterCode.ui;
 var menuSelectService = new MenuSelectService(new TodoService());
 var menuMainService = new MenuMainService(new TodoService(), menuSelectService);
 
-while (true)
+bool run = true;
+while (run)
 {
-    menuMainService.Run();
+    menuMainService.Run(ref run);
 }

@@ -5,7 +5,7 @@ namespace WorkshopInputBetterCode.ui;
 
 public class MenuMainService(ITodoService todoService, IMenuSelectService selectService) : IMenuMainService
 {
-    public void Run()
+    public void Run(ref bool run)
     {
         try
         {
@@ -25,7 +25,7 @@ public class MenuMainService(ITodoService todoService, IMenuSelectService select
                 case MenuMain.AddTask:    AddTask();                        break;
                 case MenuMain.SelectTask: SelectTask();                     break;
                 case MenuMain.ListTasks:  ListTasks();                      break;
-                case MenuMain.Exit:       Environment.Exit(0);              break;
+                case MenuMain.Exit:       run = false;                      break;
                 default:                  
                     Console.WriteLine("Invalid choice"); Console.ReadKey(); break;
             }

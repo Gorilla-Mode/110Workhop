@@ -7,7 +7,7 @@ public interface IMenuMainService
     /// <summary>
     /// Executes the main menu functionality
     /// </summary>
-    public void Run();
+    public void Run(ref bool run);
 
     /// <summary>
     /// Adds a new task by prompting the user for its name and description.
