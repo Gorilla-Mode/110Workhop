@@ -2,7 +2,7 @@
 using WorkshopInputBetterCode.interfaces;
 using WorkshopInputBetterCode.models;
 
-namespace WorkshopInputBetterCode.services;
+namespace WorkshopInputBetterCode.ui;
 
 public class MenuSelectService(ITodoService todoService) : IMenuSelectService
 {
@@ -40,6 +40,7 @@ public class MenuSelectService(ITodoService todoService) : IMenuSelectService
 
     public void Delete(Todo selected)
     {
+        Console.Clear();
         todoService.Remove(selected);
         Console.WriteLine($"Task '{selected.Name}' deleted");
         Console.ReadKey();
@@ -47,6 +48,7 @@ public class MenuSelectService(ITodoService todoService) : IMenuSelectService
 
     public void MarkDone(Todo selected)
     {
+        Console.Clear();
         todoService.MarkDone(selected);
         Console.WriteLine($"Task '{selected.Name}' marked as done");
         Console.ReadKey();
@@ -54,6 +56,7 @@ public class MenuSelectService(ITodoService todoService) : IMenuSelectService
 
     public void Read(Todo selected)
     {
+        Console.Clear();
         Console.WriteLine(selected.ToString());
         Console.ReadKey();
     }

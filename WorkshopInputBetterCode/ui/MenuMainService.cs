@@ -1,7 +1,7 @@
 ﻿using WorkshopInputBetterCode.enums;
 using WorkshopInputBetterCode.interfaces;
 
-namespace WorkshopInputBetterCode.services;
+namespace WorkshopInputBetterCode.ui;
 
 public class MenuMainService(ITodoService todoService, IMenuSelectService selectService) : IMenuMainService
 {
